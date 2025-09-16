@@ -67,7 +67,7 @@ class MultiHeadAttentionBlock(nn.Module):
         
         # Apply mask (if provided) -> very negative values where mask == 0
         if mask is not None:
-            attention_score = attention_score.masked_fill(mask == 0, -1e9)
+            attention_score = attention_score.masked_fill(mask == 0, float('-inf'))
         
         # Normalize scores into probabilities
         attention_score = attention_score.softmax(dim=-1)

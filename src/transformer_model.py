@@ -1,12 +1,12 @@
 import torch
 import torch.nn as nn
 
-from src.transformer_blocks.decoder_block import Decoder, DecoderBlock
-from src.transformer_blocks.encoder_block import Encoder, EncoderBlock
-from src.transformer_blocks.input_embedding import InputEmbedding
-from src.transformer_blocks.positional_encoding import LearnedPositionalEncoding
-from src.transformer_blocks.projection_layer import ProjectionLayer
-from src.transformer_blocks.multi_head_attention_block import MultiHeadAttentionBlock
+from transformer_blocks.decoder_block import Decoder, DecoderBlock
+from transformer_blocks.encoder_block import Encoder, EncoderBlock
+from transformer_blocks.input_embedding import InputEmbedding
+from transformer_blocks.positional_encoding import LearnedPositionalEncoding
+from transformer_blocks.projection_layer import ProjectionLayer
+from transformer_blocks.multi_head_attention_block import MultiHeadAttentionBlock
 from transformer_blocks.feed_forward import FeedForward
 
 
@@ -79,8 +79,8 @@ def building_transformer(src_vocab_size: int, trg_vocab_size: int,
                          src_seq_len: int,
                          trg_seq_len: int,
                          d_model: int = 512,
-                         N: int = 6,
-                         h: int = 8,
+                         N: int = 4,
+                         h: int = 4,
                          dropout: float = 0.1,
                          d_ff: int = 2048):
     """
@@ -128,8 +128,8 @@ def building_transformer(src_vocab_size: int, trg_vocab_size: int,
         decoder_blocks.append(decoder_block)
 
     # Wrap encoder & decoder layers into Modules
-    encoder = Encoder(nn.ModuleList(encoder_blocks))
-    decoder = Decoder(nn.ModuleList(decoder_blocks))
+    encoder = Encoder(nn.ModuleList(encoder_blocks), d_model )
+    decoder = Decoder(nn.ModuleList(decoder_blocks) , d_model)
 
     # Projection layer to vocab size
     projection_layer = ProjectionLayer(d_model, trg_vocab_size)
@@ -147,3 +147,9 @@ def building_transformer(src_vocab_size: int, trg_vocab_size: int,
             nn.init.xavier_uniform_(p)
 
     return transformer
+
+
+def get_model(config):
+    model = building_transformer(config['src_vocab_size'] , config['trg_vocab_size'] , config['seq_len'] , config['seq_len'] , config['d_model'] )
+    
+    return model

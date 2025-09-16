@@ -1,5 +1,6 @@
 import torch
 from torch.utils.data import Dataset, DataLoader
+import torch.nn.functional as F
 
 PAD_ID = 0   # نفس اللي حددته في SentencePiece
 BOS_ID = 1
@@ -43,33 +44,47 @@ def collate_fn(batch):
         src_padded[i, :len(src)] = src
         trg_padded[i, :len(trg)] = trg
 
-    # attention masks (1 للـ tokens و 0 للـ padding)
-    src_mask = (src_padded != PAD_ID).int()
-    trg_mask = (trg_padded != PAD_ID).int()
+    # Padding masks (True for tokens, False for padding)
+    src_padding_mask = (src_padded != PAD_ID).unsqueeze(1).unsqueeze(2)  # (B,1,1,S)
 
-    # decoder inputs (shifted right → يبدأ بـ BOS)
+    # Decoder inputs/targets (shifted)
     decoder_input = trg_padded[:, :-1]
-    # decoder targets (shifted left → ينتهي بـ EOS)
     decoder_target = trg_padded[:, 1:]
+
+    # Causal mask for decoder to prevent attending to future positions
+    tgt_len = decoder_input.size(1)
+    causal_mask = torch.tril(torch.ones((tgt_len, tgt_len), dtype=torch.bool, device=decoder_input.device))
+    causal_mask = causal_mask.unsqueeze(0).unsqueeze(1)  # (1,1,T,T)
+
+    # Target key padding mask must align with decoder_input length
+    trg_key_padding_mask = (decoder_input != PAD_ID).unsqueeze(1).unsqueeze(2)  # (B,1,1,T)
+    # Combine padding and causal masks for target: broadcasts to (B,1,T,T)
+    trg_mask = causal_mask & trg_key_padding_mask
 
     return {
         "src_input": src_padded,
-        "src_mask": src_mask,
+        "src_mask": src_padding_mask,   # (B,1,1,S)
         "decoder_input": decoder_input,
         "decoder_target": decoder_target,
-        "trg_mask": trg_mask
+        "trg_mask": trg_mask            # (B,1,T,T)
     }
 
-# train/valid DataLoader
-train_dataset = TranslationDataset("../Data/encoded_data/train.ids.ar",
-                                   "../Data/encoded_data/train.ids.en",
-                                   max_len=80)
 
-valid_dataset = TranslationDataset("../Data/encoded_data/validation.ids.ar",
-                                   "../Data/encoded_data/validation.ids.en",
-                                   max_len=80)
 
-train_loader = DataLoader(train_dataset, batch_size=16, shuffle=True, collate_fn=collate_fn)
-valid_loader = DataLoader(valid_dataset, batch_size=16, shuffle=False, collate_fn=collate_fn)
+def get_data_loader(config):
+    # train/valid DataLoader
+    train_dataset = TranslationDataset("../Data/encoded_data/train.ids.ar",
+                                    "../Data/encoded_data/train.ids.en",
+                                    max_len=config['seq_len'])
 
-print("✅ DataLoader ready")
+    valid_dataset = TranslationDataset("../Data/encoded_data/validation.ids.ar",
+                                    "../Data/encoded_data/validation.ids.en",
+                                    max_len=config['seq_len'])
+
+    train_loader = DataLoader(train_dataset, batch_size=config['batch_size'], shuffle=True, collate_fn=collate_fn)
+    valid_loader = DataLoader(valid_dataset, batch_size=config['batch_size'], shuffle=False, collate_fn=collate_fn)
+    
+    print("✅ DataLoader ready")
+
+    return train_loader , valid_loader
+

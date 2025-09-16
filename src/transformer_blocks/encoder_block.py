@@ -1,10 +1,10 @@
 import torch
 import torch.nn as nn
 
-from src.transformer_blocks.multi_head_attention_block import MultiHeadAttentionBlock
-from src.transformer_blocks.feed_forward import FeedForward
-from src.transformer_blocks.residual_connections import ResidualConnection
-from src.transformer_blocks.layer_normalization import LayerNormalization
+from transformer_blocks.multi_head_attention_block import MultiHeadAttentionBlock
+from transformer_blocks.feed_forward import FeedForward
+from transformer_blocks.residual_connections import ResidualConnection
+from transformer_blocks.layer_normalization import LayerNormalization
 
 
 class EncoderBlock(nn.Module):
@@ -76,10 +76,10 @@ class Encoder(nn.Module):
         - Output: (batch_size, seq_len, d_model)
     """
 
-    def __init__(self, layers: nn.ModuleList):
+    def __init__(self, layers: nn.ModuleList , d_model):
         super().__init__()
         self.layers = layers
-        self.norm = LayerNormalization()
+        self.norm = LayerNormalization(d_model)
 
     def forward(self, x, mask):
         """
