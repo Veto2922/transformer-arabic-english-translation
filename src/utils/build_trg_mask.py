@@ -1,5 +1,5 @@
 import torch
-from data_loader import PAD_ID
+from ..data_loader import PAD_ID
 
 def build_trg_mask(decoder_input: torch.Tensor) -> torch.Tensor:
     """

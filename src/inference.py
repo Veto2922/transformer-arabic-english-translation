@@ -15,6 +15,7 @@ def load_model_and_tokenizers(cfg: dict, device: torch.device):
     model = get_model(cfg).to(device)
     if cfg.get("preload"):
         weights_path = get_weights_file_path(cfg, cfg["preload"])
+        print("weight_path: " , weights_path)
         if Path(weights_path).exists():
             state = torch.load(weights_path, map_location=device)
             model.load_state_dict(state["model_state_dict"])

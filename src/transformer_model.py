@@ -1,13 +1,13 @@
 import torch
 import torch.nn as nn
 
-from transformer_blocks.decoder_block import Decoder, DecoderBlock
-from transformer_blocks.encoder_block import Encoder, EncoderBlock
-from transformer_blocks.input_embedding import InputEmbedding
-from transformer_blocks.positional_encoding import LearnedPositionalEncoding
-from transformer_blocks.projection_layer import ProjectionLayer
-from transformer_blocks.multi_head_attention_block import MultiHeadAttentionBlock
-from transformer_blocks.feed_forward import FeedForward
+from .transformer_blocks.decoder_block import Decoder, DecoderBlock
+from .transformer_blocks.encoder_block import Encoder, EncoderBlock
+from .transformer_blocks.input_embedding import InputEmbedding
+from .transformer_blocks.positional_encoding import LearnedPositionalEncoding
+from .transformer_blocks.projection_layer import ProjectionLayer
+from .transformer_blocks.multi_head_attention_block import MultiHeadAttentionBlock
+from .transformer_blocks.feed_forward import FeedForward
 
 
 class Transformer(nn.Module):

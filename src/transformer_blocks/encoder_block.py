@@ -1,10 +1,10 @@
 import torch
 import torch.nn as nn
 
-from transformer_blocks.multi_head_attention_block import MultiHeadAttentionBlock
-from transformer_blocks.feed_forward import FeedForward
-from transformer_blocks.residual_connections import ResidualConnection
-from transformer_blocks.layer_normalization import LayerNormalization
+from .multi_head_attention_block import MultiHeadAttentionBlock
+from .feed_forward import FeedForward
+from .residual_connections import ResidualConnection
+from .layer_normalization import LayerNormalization
 
 
 class EncoderBlock(nn.Module):

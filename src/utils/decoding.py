@@ -1,7 +1,7 @@
 import torch
 
-from data_loader import BOS_ID, EOS_ID
-from utils.build_trg_mask import build_trg_mask
+from ..data_loader import BOS_ID, EOS_ID
+from .build_trg_mask import build_trg_mask
 
 
 def greedy_decode(model, src, src_mask, max_len, device):

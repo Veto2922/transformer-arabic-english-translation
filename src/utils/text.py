@@ -1,6 +1,6 @@
 import torch
 
-from data_loader import PAD_ID, BOS_ID, EOS_ID
+from ..data_loader import PAD_ID, BOS_ID, EOS_ID
 
 
 def ids_to_text(tokenizer, ids: torch.Tensor) -> str:

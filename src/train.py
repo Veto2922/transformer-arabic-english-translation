@@ -4,9 +4,9 @@ import torch.nn as nn
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
-from config import get_config, get_weights_file_path
-from data_loader import get_data_loader, PAD_ID
-from transformer_model import get_model
+from .config import get_config, get_weights_file_path
+from .data_loader import get_data_loader, PAD_ID
+from .transformer_model import get_model
 
 
 def train_model(cfg: dict) -> None:

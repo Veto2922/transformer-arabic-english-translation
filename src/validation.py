@@ -5,17 +5,17 @@ from torchmetrics.text.bleu import BLEUScore
 from torchmetrics.text.wer import WordErrorRate
 from torchmetrics.text.cer import CharErrorRate
 
-from data_loader import PAD_ID , BOS_ID , EOS_ID
-from utils.text import ids_to_text
-from utils.decoding import greedy_decode , beam_search_decode
-from utils.metrics import compute_text_metrics
+from .data_loader import PAD_ID , BOS_ID , EOS_ID
+from .utils.text import ids_to_text
+from .utils.decoding import greedy_decode , beam_search_decode
+from .utils.metrics import compute_text_metrics
 
 from pathlib import Path
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
-from config import get_config, get_weights_file_path
-from transformer_model import get_model
-from data_loader import get_data_loader, collate_fn 
+from .config import get_config, get_weights_file_path
+from .transformer_model import get_model
+from .data_loader import get_data_loader, collate_fn 
 
 
 
