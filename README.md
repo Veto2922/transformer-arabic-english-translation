@@ -34,7 +34,7 @@ A complete implementation of the Transformer architecture from scratch for Arabi
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/yourusername/transformer-arabic-english-translation.git
+git clone https://github.com/Veto2922/transformer-arabic-english-translation.git
 cd transformer-arabic-english-translation
 ```
 
@@ -195,84 +195,6 @@ The project includes attention visualization capabilities to understand how the 
 - **Decoder Self-Attention**: Reveals English word generation patterns
 - **Cross-Attention**: Displays Arabic-English word alignments
 
-## 🚀 Hugging Face Hub Integration
-
-This project is designed to be compatible with Hugging Face Hub for easy model sharing and deployment:
-
-### Model Card Template
-```yaml
-language:
-- ar
-- en
-tags:
-- translation
-- transformer
-- arabic
-- english
-metrics:
-- bleu
-- wer
-- cer
-```
-
-### Usage with Transformers
-```python
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-
-# Load model and tokenizers
-model = AutoModelForSeq2SeqLM.from_pretrained("your-username/arabic-english-transformer")
-tokenizer = AutoTokenizer.from_pretrained("your-username/arabic-english-transformer")
-
-# Translate
-text = "مرحبا بالعالم"
-inputs = tokenizer(text, return_tensors="pt")
-outputs = model.generate(**inputs)
-translation = tokenizer.decode(outputs[0], skip_special_tokens=True)
-```
-
-## 📚 Technical Details
-
-### Architecture Specifications
-- **Layers**: 4 encoder + 4 decoder layers
-- **Attention Heads**: 4 heads per layer
-- **Hidden Dimension**: 512
-- **Feed-Forward Dimension**: 2048
-- **Dropout**: 0.1
-- **Learning Rate**: 1e-4
-- **Batch Size**: 128
-
-### Training Configuration
-- **Optimizer**: Adam with epsilon=1e-9
-- **Loss Function**: Cross-entropy with label smoothing (0.1)
-- **Mixed Precision**: FP16 with gradient scaling
-- **Sequence Length**: 80 tokens
-- **Epochs**: 10 (configurable)
-
-## 🛠️ Development
-
-### Running Tests
-```bash
-python -m pytest tests/
-```
-
-### Code Style
-This project follows PEP 8 standards and includes:
-- Type hints for better code clarity
-- Comprehensive docstrings
-- Modular architecture following SOLID principles
-- Clean separation of concerns
-
-### Contributing
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 🙏 Acknowledgments
 
 - Original Transformer paper: "Attention Is All You Need" (Vaswani et al., 2017)
@@ -280,15 +202,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - SentencePiece for subword tokenization
 - PyTorch team for the deep learning framework
 
-## 📞 Contact
 
-For questions, issues, or contributions, please:
-- Open an issue on GitHub
-- Contact: [your-email@example.com]
 
 ## 🔗 Links
-
-- [Hugging Face Model Hub](https://huggingface.co/your-username/arabic-english-transformer)
+- [Hugging Face Model Hub](https://huggingface.co/Abdelrahman2922/arabic-english-transformer)
 - [Google Drive - Tokenizers](https://drive.google.com/drive/folders/1VpmEeEwo6OZZ4nGuw5hDnAKsRqvlDOv4?usp=sharing)
 - [Google Drive - Model Weights](https://drive.google.com/drive/folders/1dcu8r-c28E3-V7cs0ArpNu5gWn_VjHP2?usp=sharing)
 - [Original Transformer Paper](https://arxiv.org/abs/1706.03762)
