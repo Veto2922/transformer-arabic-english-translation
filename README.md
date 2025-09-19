@@ -6,6 +6,7 @@ A complete implementation of the Transformer architecture from scratch for **Ara
 Beyond merely replicating the original design, this endeavor also incorporated several modern practices and enhancements to improve stability and efficiency. These included using learned positional embeddings for greater flexibility, implementing pre-normalization for enhanced training stability, employing SentencePiece with a Unigram model for robust tokenization of Arabic, and integrating training optimizations such as label smoothing and mixed-precision (FP16) training with a gradient scaler.
 
 📖 **Full Project Article**: [Building a Transformer from Scratch for Arabic-English Translation](https://medium.com/@abdelrahman.m2922/building-a-transformer-from-scratch-for-arabic-english-translation-1790864e55b0)
+
 🤗 **Model & Tokenizers on Hugging Face**: [Arabic-English Transformer](https://huggingface.co/Abdelrahman2922/arabic-english-transformer)
 
 <img width="1901" height="573" alt="image" src="https://github.com/user-attachments/assets/1d2147aa-a2a0-4903-99e7-2a1c95913418" />
