@@ -209,3 +209,9 @@ __marimo__/
 
 Data
 tokenizer_models
+src\weights
+\weights
+
+*.pt
+*.pth
+*.bin

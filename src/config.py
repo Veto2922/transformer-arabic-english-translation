@@ -15,7 +15,7 @@ def get_config():
         # Store checkpoints inside the project under ./weights
         "model_folder": "weights",
         "model_basename": "tmodel_",
-        "preload": "01",
+        "preload": "02",
         # TensorBoard run directory inside the project
         "experiment_name": str((Path("runs") / "tmodel").as_posix())
         

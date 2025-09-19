@@ -82,7 +82,7 @@ def get_data_loader(config):
                                     max_len=config['seq_len'])
 
     train_loader = DataLoader(train_dataset, batch_size=config['batch_size'], shuffle=True, collate_fn=collate_fn)
-    valid_loader = DataLoader(valid_dataset, batch_size=config['batch_size'], shuffle=False, collate_fn=collate_fn)
+    valid_loader = DataLoader(valid_dataset, batch_size=1, shuffle=False, collate_fn=collate_fn)
     
     print("✅ DataLoader ready")
 
