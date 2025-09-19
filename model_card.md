@@ -116,16 +116,7 @@ After 3 epochs of training:
 - Arabic text preprocessing removes diacritics, which may affect some translations
 - Maximum sequence length is limited to 80 tokens
 
-## Citation
 
-```bibtex
-@misc{arabic-english-transformer,
-  title={Arabic-English Translation Transformer},
-  author={Your Name},
-  year={2024},
-  url={https://github.com/yourusername/transformer-arabic-english-translation}
-}
-```
 
 ## License
 
